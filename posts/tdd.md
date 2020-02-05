@@ -1,5 +1,15 @@
 # TDD para Frontend
 
+Eu não deveria falar disso nesse momento pois considero óbvio. Mas é sempre bom
+reforçar a importantia dos testes. **Escreva testes**.
+Testes são extremamente importantes pois existem 2 verdades sobre seu software.
+
+1. Seu software sempre vai ser testado, se você não testar o usuário vai.
+1, Uma hora o teste vai falhar.
+
+E acredite em mim, você não quer que seu software quebre só quando chegar no
+usuário, se ele quebrar antes, você consiguirá arrumar ele antes.
+
 ## TDD
 
 Antes de falarmos de ferramentas de testes para frontend, precisamos explicar o
@@ -28,5 +38,23 @@ o nosso código deverá fazer.
 
 ### Porque usar TDD
 
+* Ja é o processo que muitas pessoas fazem mentalmente sem nem mesmo perceber
 * Seus testes não ficam enviezados
 * É mais rapido do que escrever os testes depois do código
+
+Por fim, existem mais coisas sobre TDD, como ciclo Read, Green,, Refactory que
+não expliquei aqui para não me estender muito, mas existe muito material bom na
+internet sobre isso.
+
+## Mas como aplicar isso no frontend?
+
+Como na Revelo usamos Vue.js no front end, vou exemplificar tudo usando
+Ferramenta do Vue.js, mas Esse conceitos podem ser aplicados em outros
+frameworks.
+
+### Primeiros passos
+
+A primeiro coisa que você precisa para desenvolver, é saber o que desenvolver.
+
+
+
