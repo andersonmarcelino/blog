@@ -57,7 +57,7 @@ uma escrita ais simples
 
 Todo o codigo pode ser encontratado em meu repositorio do [github](https://github.com/andersonmarcelino/todovue)
 
-## Levantando os requisitos
+## Mãos na massa
 
 O primeiro requisito de um todo list é a possibilidade de criar um item.
 O processo de criar um item consiste em digitar o item em um campo de texto e
