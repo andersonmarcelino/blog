@@ -69,8 +69,96 @@ O teste para isso ficaria assim
 it('Adds a item on todolist', () => {
   cy.visit('/')
   cy.get('[data-test="input-add"]').type('Primeira Tarefa{enter}')
-  cy.get('[todo-list]').contains('Primeira Tarefa')
+  cy.get('[data-test="todo-list"]').contains('Primeira Tarefa')
 })
 ```
 
 Literalmente pegamos  primeiro input e digitamos o que queremo e aperamos enter.
+
+Um detalhe desse codigo é o uso desse ``data-test``. Existe uma grande discução
+se pegamos os elementos utilizando classes ou id, e um argumento que existe na
+comunidade é que nenhum deles é saudavel. classes são referentes a estilo e se o
+estilo do elemento muda, o teste quebra. e id não são tão usado assim. então o
+que eu me  sinto mais confortavel de usar é o data-test
+
+E quando rodamos o teste, isso mesmo, ele **falha**
+
+E falha por que não implementamos o função, então esse é o proximo passo do TDD,
+fazer o teste passar. Então vamos no nosso component TodoList e colocamos o
+seguinte codigo
+
+``` javascript
+export default {
+  name: 'TodoList',
+  data () {
+    return {
+      todoList: [],
+      inputAdd: '',
+    }
+  },
+  methods: {
+    addItem () {
+      this.todoList.push({
+        id: Math.random(),
+        label: this.inputAdd
+      })
+    }
+  }
+}
+```
+
+Aqui implementamos, usando Vue, os dados que precisamos para nosso teste passar.
+criamos a todoList e o input Add, e logo depois o metodo que adiciona o inputAdd
+na lista.
+
+e depois disso colocamos os elemento no html
+
+```html
+<section class="todo-list">
+  <input data-test="input-add" @keyup.enter="addItem" v-model="inputAdd"/>
+  <ul data-test="todo-list">
+    <li v-for="item in todoList" :key="item.id">
+      {{item.label}}
+    </li>
+  </ul>
+</section>
+```
+
+onde adicionamos os elementos (com o data-test) e anexamos com os elementos do
+data no script acima
+
+e ao rodar... nosso teste passa.
+
+E quando vemos a tela percebemos que o texto continua no campo. o que não da uma
+experiencia legal. Então criamos nosso segundo caso de teste. queremos que o
+campo seja limpo ao finalizar.
+
+``` javascript
+it('Clear the input', () => {
+  cy.visit('/')
+  cy.get('[data-test="input-add"]').type('Primeira Tarefa{enter}')
+  cy.get('[data-test="input-add"]').should('have.value', '')
+})
+```
+
+O que dizemos aqui é que queremos que após digitar o que foi digitado o campo
+fique vazio.
+Novamente o teste falha por que está escrito "Primeira Tarefa no campo"
+
+Para revsolver adicionamos ``this.inputAdd = ''`` no metodo que cria a tarefa.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
