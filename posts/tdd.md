@@ -48,13 +48,20 @@ internet sobre isso.
 
 ## Mas como aplicar isso no frontend?
 
-Como na Revelo usamos Vue.js no front end, vou exemplificar tudo usando
-Ferramenta do Vue.js, mas Esse conceitos podem ser aplicados em outros
-frameworks.
-
 ### Primeiros passos
 
 A primeiro coisa que você precisa para desenvolver, é saber o que desenvolver.
+No nosso exercicio vamos criar um TodoList com VueJS, e para escrever nossos
+testes utilizarei do Cypress, pois é uma ferramenta mais visual, completa e com
+uma escrita ais simples
+
+Todo o codigo pode ser encontratado em meu repositorio do [github](https://github.com/andersonmarcelino/todovue)
+
+## Levantando os requisitos
+
+O primeiro requisito de um todo list é a possibilidade de criar um item.
+O processo de criar um item consiste em digitar o item em um campo de texto e
+apertar Enter (ou  botão de add)
 
 
 
