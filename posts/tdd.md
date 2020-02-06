@@ -63,5 +63,14 @@ O primeiro requisito de um todo list é a possibilidade de criar um item.
 O processo de criar um item consiste em digitar o item em um campo de texto e
 apertar Enter (ou  botão de add)
 
+O teste para isso ficaria assim
 
+``` javascript
+it('Adds a item on todolist', () => {
+  cy.visit('/')
+  cy.get('[data-test="input-add"]').type('Primeira Tarefa{enter}')
+  cy.get('[todo-list]').contains('Primeira Tarefa')
+})
+```
 
+Literalmente pegamos  primeiro input e digitamos o que queremo e aperamos enter.
