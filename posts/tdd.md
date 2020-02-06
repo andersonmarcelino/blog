@@ -5,7 +5,7 @@ reforçar a importantia dos testes. **Escreva testes**.
 Testes são extremamente importantes pois existem 2 verdades sobre seu software.
 
 1. Seu software sempre vai ser testado, se você não testar o usuário vai.
-1, Uma hora o teste vai falhar.
+1. Uma hora o teste vai falhar.
 
 E acredite em mim, você não quer que seu software quebre só quando chegar no
 usuário, se ele quebrar antes, você consiguirá arrumar ele antes.
