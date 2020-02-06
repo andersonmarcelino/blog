@@ -147,18 +147,100 @@ Novamente o teste falha por que está escrito "Primeira Tarefa no campo"
 
 Para revsolver adicionamos ``this.inputAdd = ''`` no metodo que cria a tarefa.
 
+O proximo passo consiste em marcar as tarefas como Done. mas a partir daqui
+precisamos de varias tarefas criadas. então criaremos um setup para nosso teste
 
+``` javascript
+function setup (cy) {
+  cy.visit('/')
+  cy.get('[data-test="input-add"]').type('Criar Lista{enter}')
+  cy.get('[data-test="input-add"]').type('Executar a Lista{enter}')
+  cy.get('[data-test="input-add"]').type('Finalizar a Lista{enter}')
+}
+```
 
+e escrevemos nosso teste
 
+``` javascript
+it('Move item to list below', () => {
+  setup(cy)
 
+  cy.get('[data-test="todo-list"] li:nth-child(2) [type=checkbox]')
+    .click()
 
+  cy.get('[data-test="done-list"] li')
+    .should('have.length', 1)
+```
 
+Aqui clicamos em um checkbox e esperamos que ele va para a tela de baixo.
+rodamos e o teste falha por que não colocamos um checkbox. então fazemos isso
 
+Criamos primeiro a lista de Done
 
+``` html
+<ul data-test="done-list">
+  <li v-for="item in doneList" :key="item.id">
+    <input type="checkbox" v-model="item.done">
+    {{item.label}}
+  </li>
+</ul>
+```
+E adicionamos o checkbox na lista de todo tbm para que o possa ser clicavel
+e depois disso criamos nosso computed e alteramos a função de adicionar para
+contemplar a função de checked
 
+``` javascript
+computed: {
+  doneList () {
+    return this.todoList.filter((item) => item.done)
+  }
+},
+methods: {
+  addItem () {
+    this.todoList.push({
+      id: Math.random(),
+      label: this.inputAdd,
+      done: false
+    })
+    this.inputAdd = ''
+  }
+}
+```
 
+E novamente o teste passa. mas temos outro comportamento extranho, o item fica
+duplicado em ambas as listas
 
+O que nos leva ao nosso ultimo spec
 
+``` javascript
+it('Remove item from todo list', () => {
+  setup(cy)
 
+  cy.get('[data-test="todo-list"] li:nth-child(2) [type=checkbox]')
+    .click()
 
+  cy.get('[data-test="todo-list"] li')
+    .should('have.length', 2)
+})
+```
 
+E advinhem. isso mesmo. o teste falha.
+
+E pra passar, fazemos uam pequena refatorada na nossa lista
+chamamos a todolist de fulllist, e criamos um computed só com os toDos
+
+deixando nossa todoList assim
+
+``` javascript
+todoList () {
+  return this.fullList.filter((item) => !item.done)
+}
+```
+
+E com isso nosso teste passa!
+
+Exitem mais funcionalidades para nosso Todolist ficar completo, mas acredito que
+com esses casos ja deu para pegar a ideia.
+
+Caso queiram entender o código e ir brincando, podem baixar o repositorio e se
+orientar pelas tags para entender o processo
